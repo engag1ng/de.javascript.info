@@ -1,10 +1,10 @@
-# JSON methods, toJSON
+# JSON Methoden, toJSON
 
-Let's say we have a complex object, and we'd like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+Sagen wir, wir haben ein komplexes Objekt und wir möchten es gerne in einen String konvertieren um es über ein Netzwerk zu senden oder einfach nur für Dokumentationszwecke auszugeben.
 
-Naturally, such a string should include all important properties.
+Natürlich sollte solch ein String alle wichtigen Eigenschaften enthalten.
 
-We could implement the conversion like this:
+Wir könnten die Umwandlung folgendermaßen implementieren:
 
 ```js run
 let user = {
@@ -21,20 +21,20 @@ let user = {
 alert(user); // {name: "John", age: 30}
 ```
 
-...But in the process of development, new properties are added, old properties are renamed and removed. Updating such `toString` every time can become a pain. We could try to loop over properties in it, but what if the object is complex and has nested objects in properties? We'd need to implement their conversion as well.
+Aber in diesem Entwicklungsprozess werden neue Eigenschaften hinzugefügt, alte werden umbenannt und gelöscht. Solch ein `toString` jedes mal up zu daten würde nervig werden. Wir könnten versuchen über Eigenschaften darin zu iterieren, aber was wenn das Objekt komplex ist und verschachtelte Objekte als Eigenschaften hat? Wir müssten dessen Umwandlung auch implementieren.
 
-Luckily, there's no need to write the code to handle all this. The task has been solved already.
+Zum Glück müssen wir den Code nicht schreiben der sich um dies kümmert. Dieses Problem wurde bereits gelöst.
 
 ## JSON.stringify
 
-The [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+Die [JSON](https://de.wikipedia.org/wiki/JSON) (JavaScript Object Notation) ist ein allgemeines format um Werte und Objekte zu repräsentieren. Es wird wie im [RFC 4627](https://tools.ietf.org/html/rfc4627) standart beschrieben. Ursprünglich wurde es für JavaScript entwickelt, aber viele andere Programmiersprachen haben auch Bibliotheken um JSON zu unterstützen. Es ist also einfach JSON zu für Datenaustausch zu verwenden wenn der Client JavaScript nutzt und der Server in Ruby/PHP/Java oder was auch immer geschrieben ist.
 
-JavaScript provides methods:
+JavaScript stellt Methoden bereit:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` um Objekte in JSON zu konvertieren.
+- `JSON.parse` um JSON zurück in ein Objekt zu konvertieren.
 
-For instance, here we `JSON.stringify` a student:
+Zum Beispiel, hier nutzen wir `JSON.stringify` für einen Schüler:
 ```js run
 let student = {
   name: 'John',
@@ -48,7 +48,7 @@ let student = {
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // Wir haben einen String!
 
 alert(json);
 *!*
@@ -64,12 +64,12 @@ alert(json);
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+Die Methode `JSON.stringify(student)` nimmt das Objekt und konvertiert es in einen String.
 
-The resulting `json` string is called a *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+Der resultierende `json` String wir als *JSON-codiert* oder *angeordnet* oder *stringifiziert* oder *arrangiert* bezeichnet. Wir sind bereit es weiter zu senden oder es zu speichern.
 
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+Bitte beachte, dass das ein JSON-codiertes Objekt mehrere wichtige Unterschiede im Vergleich zum normalen Objekt hat:
 
 - Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
 - Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
